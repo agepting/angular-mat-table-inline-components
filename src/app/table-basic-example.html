@@ -1,0 +1,42 @@
+<mat-card class="FactorAllocationCard">
+	<mat-card-header>
+		<mat-card-title>Allocate Factors</mat-card-title>
+		<span class="spacer"></span>
+		<button mat-raised-button color="primary" (click)="saveData()">
+      Save
+    </button>
+	</mat-card-header>
+	<mat-divider></mat-divider>
+	<mat-card-content>
+		<div class="factalloctable">
+			<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+				<ng-container matColumnDef="Description">
+					<th mat-header-cell *matHeaderCellDef>Factor</th>
+					<td mat-cell *matCellDef="let element">{{ element.Description }}</td>
+				</ng-container>
+				<!-- Edit Update Column -->
+				<ng-container matColumnDef="Action">
+					<th mat-header-cell *matHeaderCellDef>
+						Allocate
+					</th>
+					<td mat-cell *matCellDef="let element">
+						<button mat-icon-button color="primary" (click)="decreaseValue(element)">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+						<mat-slider thumbLabel step="0.1" max="30" min="0" color="primary" [(ngModel)]="element.Value">
+						</mat-slider>
+						<button mat-icon-button class="mat-icon-factor-def" (click)="increaseValue(element)">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+					</td>
+				</ng-container>
+				<ng-container matColumnDef="Value">
+					<th mat-header-cell *matHeaderCellDef>Allocated Value</th>
+					<td mat-cell *matCellDef="let element">{{ element.Value }}</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+			</table>
+		</div>
+	</mat-card-content>
+</mat-card>
